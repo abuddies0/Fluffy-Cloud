@@ -31,8 +31,8 @@ def open_popup(type):
 
 
 def _setup():
-    root.overrideredirect(True)
-    root.wm_attributes("-transparentcolor", '#000000')
+    # root.overrideredirect(True)
+    # root.wm_attributes("-transparentcolor", '#000000')
 
     # 3. Set size and position
     width = 640
