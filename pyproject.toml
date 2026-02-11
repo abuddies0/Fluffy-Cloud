@@ -5,8 +5,11 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "moonshine-voice>=0.0.48",
     "pillow>=12.1.1",
     "pocketsphinx>=5.0.4",
     "pyaudio>=0.2.14",
+    "pygame>=2.6.1",
+    "pyinstaller>=6.18.0",
     "speechrecognition>=3.14.5",
 ]
