@@ -67,7 +67,7 @@ def start_listening():
     parser.add_argument(
         "--model-arch",
         type=str,
-        default=None,
+        default=5,
         help="Model architecture to use for transcription",
     )
     args = parser.parse_args()
