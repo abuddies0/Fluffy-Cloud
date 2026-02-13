@@ -6,6 +6,7 @@ import time
 import popup
 import threading
 import signal
+import keyboard
 
 from moonshine_voice import (
     MicTranscriber,
@@ -15,6 +16,7 @@ from moonshine_voice import (
 
 
 stop_event = threading.Event()
+listener_thread = None
 
 
 class TerminalListener(TranscriptEventListener):
@@ -80,7 +82,7 @@ def start_listening():
     else:
         listener = FileListener()
 
-    print("Listening to the microphone, press Ctrl+C to stop...", file=sys.stderr)
+    print("Listening to the microphone, press any key to stop...", file=sys.stderr)
     mic_transcriber.add_listener(listener)
     mic_transcriber.start()
     try:
@@ -89,22 +91,22 @@ def start_listening():
     finally:
         mic_transcriber.stop()
         mic_transcriber.close()
+        print("Thread successfully terminated")
 
 
-def shutdown():
+def shutdown(e):
     print("\nShutting down...")
+    keyboard.unhook(hook)
     stop_event.set()
-    popup.root.quit()
-
-
-def handle_sigint(sig, frame):
-    shutdown()
-
-
-signal.signal(signal.SIGINT, handle_sigint)
+    listener_thread.join()
+    popup.root.after(0, popup.root.quit)
+    print("Tkinter (that sun of a gon) successfully terminated")
+    sys.exit(0)
 
 
 if __name__ == "__main__":
+    hook = keyboard.on_press(shutdown)
+
     listener_thread = threading.Thread(
         target=start_listening,
         daemon=True

@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
+    "keyboard>=0.13.5",
     "moonshine-voice>=0.0.48",
     "pillow>=12.1.1",
     "pocketsphinx>=5.0.4",
